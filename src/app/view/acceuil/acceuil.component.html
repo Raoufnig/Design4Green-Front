@@ -1,0 +1,186 @@
+<div class="card" >
+    <p-megaMenu [model]="items" styleClass="flex">
+        <ng-template pTemplate="start" >
+             <div style="display: flex; justify-content: space-around;">
+                <img src="/assets/img/logogreen.svg" height="60" class="mr-2" />
+                 <h3>Equipe - 40</h3>
+             </div>
+        </ng-template>
+        
+    </p-megaMenu>
+</div>
+
+<div class="contain">
+    <div class="centered-element">
+    
+           <h1 style="margin-top: 1%">{{description}}</h1>
+        
+    </div>
+</div>
+
+
+<div class="contain" *ngIf="visible==false">
+    <div class="centered-element">
+
+        <div style="display: flex; justify-content: space-around;">
+            <span class="p-float-label" >
+               
+                <input pInputText id="url" [(ngModel)]="value" />
+                <label htmlFor="url">Entrer l'Url de votre site</label>
+                
+                <p-message *ngIf="isErr==true" severity="error" text="Field is required"></p-message>
+               
+               
+               
+            </span>
+    
+            <div class="card flex justify-content-center" style="border-radius: 15px;">
+                <p-button styleClass="p-button-green-600
+                
+                
+                
+                
+                
+                " label="Suivant" (onClick)="step2()"></p-button>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+<div class="contain" *ngIf="visible == true">
+
+    
+        <div class="centered-element" *ngIf="end ==false">
+            <form>            
+                <p-accordion  *ngFor="let t of theme" >
+                    <p-accordionTab header="{{t}}">
+          
+                       
+                       <div *ngFor="let cri of criterias ; let i = index">
+                        <p-accordion  *ngIf="cri.thematique===t" >
+                            <p-accordionTab header="{{cri.critere}}">
+                                <p-fieldset legend="Objectif">
+                                    <p class="m-0">
+                                        {{cri.objectif}}
+                                    </p>
+                                </p-fieldset>
+                
+                                <p-fieldset legend="miseEnOeuvre">
+                                    <p class="m-0">
+                                       {{cri.miseEnOeuvre}}
+                                    </p>
+                                </p-fieldset>
+                
+                                <p-fieldset legend="Controle">
+                                    <p class="m-0">
+                                        {{cri.controle}}
+                                    </p>
+                                </p-fieldset>
+                            </p-accordionTab>
+                            
+                            <div class="flex flex-wrap gap-3" style="display: flex; justify-content: space-around; flex-wrap: wrap; margin-top: 25px; ">
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="{{cri.id}}" value="conforme" [(ngModel)]="state[i+1]" inputId="C"></p-radioButton>
+                                    <label for="ingredient1" class="ml-2"> Conforme</label>
+                                </div>
+                                
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="{{cri.id}}" value="non conforme" [(ngModel)]="state[i+1]" inputId="NC"></p-radioButton>
+                                    <label for="ingredient2" class="ml-2"> Non conforme</label>
+                                </div>
+                                
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="{{cri.id}}" value="en cours de Deploiement" [(ngModel)]="state[i+1]" inputId="ED"></p-radioButton>
+                                    <label for="ingredient3" class="ml-2"> En cours de Deploiement</label>
+                                </div>
+                
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="{{cri.id}}" value="non applicable" [(ngModel)]="state[i+1]" inputId="NA"></p-radioButton>
+                                    <label for="ingredient4" class="ml-2"> Non Applicable</label>
+                                </div>
+                            </div>
+                            <br>
+                        </p-accordion>
+                        
+                       </div>
+                    </p-accordionTab>
+                    
+                  
+                </p-accordion>
+
+                
+                    
+                    <div class="card flex justify-content-center">
+                        <p-button label="Submit" (onClick)="submit()"></p-button>
+                    </div>
+            </form>
+          
+        </div>
+
+
+
+        <div class="centered-element" *ngIf="end ==true">
+    
+            <div class="card">
+                <p-splitter [style]="{ height: '300px' }" styleClass="mb-5" layout="vertical">
+                      <ng-template pTemplate>
+                            
+                                  <div class="score">
+                                    <h1>Le score de votre site est :</h1>
+                                  </div>
+                            
+                     </ng-template>
+                     <ng-template pTemplate>
+                            
+                                   <div class="score2">
+                                    <h1>{{scoreRes.score}}</h1>
+                                  </div>
+                        
+                    </ng-template>
+                </p-splitter>
+               
+            </div>
+
+            <div class="card">
+                <p-splitter [style]="{ height: '100px' }" styleClass="mb-5" layout="vertical">
+                      <ng-template pTemplate>
+                            
+                                  <div class="score3">
+                                    
+                                    <h3>Vous pouvez exporter l'audit de votre de site</h3>
+                                    
+                                  </div>
+                            
+                     </ng-template>
+                     <ng-template pTemplate>
+                            
+                        <div  class="score2">
+                            <p-button label="Exporter" (onClick)="submit()"></p-button>
+                        </div>
+                        
+                    </ng-template>
+
+                    
+                </p-splitter>
+
+
+               
+            </div>
+        </div>
+    
+    
+    
+    
+</div>
+
+
+
+
+  
+
